@@ -3,12 +3,14 @@ package org.xpdrive.model;
 import org.xpdrive.dao.ProdutoDAO;
 
 public class Produto {
+    private int id;
     private String nome;
     private String tipo;
     private double valor;
     private int quantidade;
 
     public Produto () {
+        this.id = 0;
         this.nome = " ";
         this.tipo = " ";
         this.valor = 0.0d;
@@ -16,6 +18,15 @@ public class Produto {
     }
 
     public Produto (String nome, String tipo, double valor, int quantidade) {
+        this.id = 0;
+        this.nome = nome;
+        this.tipo = tipo;
+        this.valor = valor;
+        this.quantidade = quantidade;
+    }
+
+    public Produto (int id, String nome, String tipo, double valor, int quantidade) {
+        this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.valor = valor;
@@ -54,27 +65,23 @@ public class Produto {
         this.quantidade = quantiade;
     }
 
-    public void inserir(String nome, String tipo, double valor, int quantidade) {
+    public void inserir(Produto p) {
         ProdutoDAO pDAO = new ProdutoDAO();
+        pDAO.inserir(p);
     }
 
-    public void alterar (int id, String valor) {
+    public void alterar (int id, Produto p) {
         ProdutoDAO pDAO = new ProdutoDAO();
-    }
-
-    public void alterar (int id, double valor) {
-        ProdutoDAO pDAO = new ProdutoDAO();
-    }
-
-    public void alterar (int id, int valor) {
-        ProdutoDAO pDAO = new ProdutoDAO();
+        pDAO.alterar(id, p);
     }
 
     public void excluir (int id) {
         ProdutoDAO pDAO = new ProdutoDAO();
+        pDAO.excluir(id);
     }
 
     public void listar (int id) {
         ProdutoDAO pDAO = new ProdutoDAO();
+        pDAO.listar();
     }
 }
