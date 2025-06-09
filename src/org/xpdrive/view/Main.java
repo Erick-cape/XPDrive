@@ -33,8 +33,59 @@ public class Main {
                break;
 
            case 2:
+               System.out.println("Insira o codigo do produto a alterar: \n");
+               int id = cs.nextInt();
+               System.out.println("Informe o que deseja alterar: \n");
+               System.out.println("1-nome: \n");
+               System.out.println("2-tipo: \n");
+               System.out.println("3-valor: \n");
+               System.out.println("4-quantidade: \n");
+               int opcalt = cs.nextInt();
+
+               switch(opcalt){
+
+                   case 1:
+                       System.out.println("Insira o novo nome: \n");
+                       nome = cs.nextLine();
 
 
+                   case 2:
+                       System.out.println("Insira o novo tipo: \n");
+                       tipo = cs.nextLine();
+
+
+                   case 3:
+                       System.out.println("Insira o novo valor: \n");
+                       valor = cs.nextDouble();
+
+
+                   case 4:
+                       System.out.println("Informe a quantidade atualizada: \n");
+                       quantidade = cs.nextInt();
+
+                        controller.alterar(nome,tipo,valor,quantidade);
+                        break;
+
+               }
+
+           case 3:
+               System.out.println("Informe o codigo do produto a excluir: \n");
+               id = cs.nextInt();
+               controller.excluir(int id);
+               break;
+
+
+           case 4:
+               System.out.println("Lista de produtos: \n");
+                controller.lista();
+                break;
+
+           case 5:
+               System.out.println("Saindo... \n");
+
+
+           default:
+               System.out.println("Invalido! \n");
 
 
        }
@@ -45,7 +96,7 @@ public class Main {
    }while(opcao != 5);
 
 
-
+        cs.close();
 
 
     }
