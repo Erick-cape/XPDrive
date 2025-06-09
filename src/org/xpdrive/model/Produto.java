@@ -6,20 +6,20 @@ public class Produto {
     private String nome;
     private String tipo;
     private double valor;
-    private int quantiade;
+    private int quantidade;
 
     public Produto () {
         this.nome = " ";
         this.tipo = " ";
         this.valor = 0.0d;
-        this.quantiade = 0;
+        this.quantidade = 0;
     }
 
     public Produto (String nome, String tipo, double valor, int quantidade) {
         this.nome = nome;
         this.tipo = tipo;
         this.valor = valor;
-        this.quantiade = quantidade;
+        this.quantidade = quantidade;
     }
 
     public String getNome() {
@@ -46,12 +46,12 @@ public class Produto {
         this.valor = valor;
     }
 
-    public int getQuantiade() {
-        return quantiade;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setQuantiade(int quantiade) {
-        this.quantiade = quantiade;
+    public void setQuantidade(int quantiade) {
+        this.quantidade = quantiade;
     }
 
     public void inserir(String nome, String tipo, double valor, int quantidade) {
