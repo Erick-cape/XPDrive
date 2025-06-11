@@ -9,7 +9,7 @@ public class Produto {
     private double valor;
     private int quantidade;
 
-    public Produto () {
+    public Produto() {
         this.id = 0;
         this.nome = " ";
         this.tipo = " ";
@@ -17,7 +17,7 @@ public class Produto {
         this.quantidade = 0;
     }
 
-    public Produto (String nome, String tipo, double valor, int quantidade) {
+    public Produto(String nome, String tipo, double valor, int quantidade) {
         this.id = 0;
         this.nome = nome;
         this.tipo = tipo;
@@ -25,12 +25,20 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public Produto (int id, String nome, String tipo, double valor, int quantidade) {
+    public Produto(int id, String nome, String tipo, double valor, int quantidade) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.valor = valor;
         this.quantidade = quantidade;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -70,17 +78,17 @@ public class Produto {
         pDAO.inserir(p);
     }
 
-    public void alterar (int id, Produto p) {
+    public void alterar(int id, String atributo, Colunas coluna) {
         ProdutoDAO pDAO = new ProdutoDAO();
-        pDAO.alterar(id, p);
+        pDAO.alterar(id, atributo, coluna);
     }
 
-    public void excluir (int id) {
+    public void excluir(int id) {
         ProdutoDAO pDAO = new ProdutoDAO();
         pDAO.excluir(id);
     }
 
-    public void listar (int id) {
+    public void listar() {
         ProdutoDAO pDAO = new ProdutoDAO();
         pDAO.listar();
     }

@@ -1,114 +1,120 @@
 package org.xpdrive.view;
 
+import org.xpdrive.control.XPDriverController;
+import org.xpdrive.model.Colunas;
+import org.xpdrive.model.Produto;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+    static Scanner cs = new Scanner(System.in);
 
-    public static void main (String[] args) {
-    Scanner cs = new Scanner(System.in);
+    public static void main(String[] args) {
+        XPDriverController controller = new XPDriverController();
+        int opcao = 0;
 
-    int opcao;
+        do {
+            exibirMenu();
+            opcao = cs.nextInt();
+            limparBuffer();
 
-   do{
-       exibirMenu();
-       opcao = cs.nextInt();
-       cs.nextInt();
+            switch (opcao) {
 
-       switch (opcao){
+                case 1:
+                    System.out.println("Insira o nome do produto:");
+                    String nome = cs.nextLine();
+                    System.out.println("Insira o tipo do produto:");
+                    String tipo = cs.nextLine();
+                    System.out.println("Informe o valor do produto:");
+                    String valor = cs.nextLine();
+                    System.out.println("Informe a quantidade desejada:");
+                    String quantidade = cs.nextLine();
 
-           case 1:
-               System.out.println("Insira o nome do produto: \n");
-               String nome = cs.nextLine();
+                    try {
+                        Produto p = new Produto(nome, tipo, Double.parseDouble(valor), Integer.parseInt(quantidade));
+                        controller.cadastrar(p);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Um ou mais atributos invalidos!");
+                    }
+                    break;
 
-               System.out.println("Insira o tipo do produto: \n");
-               String tipo = cs.nextLine();
+                case 2:
+                    System.out.println("Insira o codigo do produto a alterar:");
+                    String id = cs.nextLine();
 
-               System.out.println("Informe o valor do produto: \n");
-               double valor = cs.nextDouble();
+                    System.out.println("Selecione qual atributo quer alterar");
+                    System.out.println("1 - Nome");
+                    System.out.println("2 - Tipo");
+                    System.out.println("3 - Valor");
+                    System.out.println("4 - Quantiadade");
+                    int alterarEscolha = 0;
+                    Colunas coluna = Colunas.INVALIDO;
 
-               System.out.println("Informe a quantidade desejada: \n");
-               int quantidade = cs.nextInt();
+                    try {
+                        alterarEscolha = cs.nextInt();
+                        limparBuffer();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Atributo deve ser um dos números acima.");
+                        limparBuffer();
+                    }
 
+                    coluna = coluna.atributo(alterarEscolha);
 
-               break;
+                    if (coluna != Colunas.INVALIDO) {
+                        System.out.println("Novo valor do atributo:");
+                        String atributo = cs.nextLine();
+                        try {
+                            controller.alterar(Integer.parseInt(id), atributo, coluna);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Codigo deve ser um número válido!");
+                        }
 
-           case 2:
-               System.out.println("Insira o codigo do produto a alterar: \n");
-               int id = cs.nextInt();
-               System.out.println("Informe o que deseja alterar: \n");
-               System.out.println("1-nome: \n");
-               System.out.println("2-tipo: \n");
-               System.out.println("3-valor: \n");
-               System.out.println("4-quantidade: \n");
-               int opcalt = cs.nextInt();
-
-               switch(opcalt){
-
-                   case 1:
-                       System.out.println("Insira o novo nome: \n");
-                       nome = cs.nextLine();
-
-
-                   case 2:
-                       System.out.println("Insira o novo tipo: \n");
-                       tipo = cs.nextLine();
-
-
-                   case 3:
-                       System.out.println("Insira o novo valor: \n");
-                       valor = cs.nextDouble();
-
-
-                   case 4:
-                       System.out.println("Informe a quantidade atualizada: \n");
-                       quantidade = cs.nextInt();
-
-                        controller.alterar(nome,tipo,valor,quantidade);
-                        break;
-
-               }
-
-           case 3:
-               System.out.println("Informe o codigo do produto a excluir: \n");
-               id = cs.nextInt();
-               controller.excluir(int id);
-               break;
+                    } else {
+                        System.out.println("Atributo escolhido é invalido.");
+                    }
+                    break;
 
 
-           case 4:
-               System.out.println("Lista de produtos: \n");
-                controller.lista();
-                break;
+                case 3:
+                    System.out.println("Informe o codigo do produto a excluir: \n");
+                    id = cs.nextLine();
+                    try {
+                        controller.excluir(Integer.parseInt(id));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Codigo deve ser um numero valido!");
+                    }
 
-           case 5:
-               System.out.println("Saindo... \n");
-
-
-           default:
-               System.out.println("Invalido! \n");
-
-
-       }
+                    break;
 
 
+                case 4:
+                    System.out.println("Lista de produtos: \n");
+                    controller.listar();
+                    break;
 
+                case 5:
+                    System.out.println("Saindo... \n");
+                    break;
 
-   }while(opcao != 5);
-
-
+                default:
+                    System.out.println("Invalido! \n");
+            }
+        } while (opcao != 5);
         cs.close();
-
-
     }
 
-    public static void exibirMenu(){
+    public static void exibirMenu() {
         System.out.println("\n =-=-=-=-=Menu=-=-=-=--=");
-        System.out.println("1- Cadastrar produto: \n");
-        System.out.println("2- Alterar: \n");
-        System.out.println("3- Excluir produto \n");
-        System.out.println("4- Listar: \n");
-        System.out.println("5- Sair: \n");
+        System.out.println("1- Cadastrar produto");
+        System.out.println("2- Alterar");
+        System.out.println("3- Excluir produto");
+        System.out.println("4- Listar");
+        System.out.println("5- Sair");
     }
 
+    public static void limparBuffer() {
+        cs.nextLine();
+    }
 }
 
