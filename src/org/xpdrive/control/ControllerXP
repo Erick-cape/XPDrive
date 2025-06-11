@@ -1,0 +1,27 @@
+package org.xpdrive.control;
+
+import org.xpdrive.model.Produto;
+import java.util.List;
+
+public class Controller {
+
+    public void cadastrarProduto(String nome, String tipo, double valor, int quantidade) {
+        Produto produto = new Produto(nome, tipo, valor, quantidade);
+        produto.inserir(produto);
+    }
+
+    public void alterarProduto(int id, String nome, String tipo, double valor, int quantidade) {
+        Produto produtoAtualizado = new Produto(id, nome, tipo, valor, quantidade);
+        produtoAtualizado.alterar(id, produtoAtualizado);
+    }
+
+    public void excluirProduto(int id) {
+        Produto produto = new Produto();
+        produto.excluir(id);
+    }
+
+    public void listarProdutos() {
+        Produto produto = new Produto();
+        produto.listar(0); 
+    }
+}
