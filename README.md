@@ -12,7 +12,7 @@ create table Produtos (
     quantidade int not null
 );
 
-INSERT INTO Items (nome, tipo, valor, quantidade) VALUES
+INSERT INTO Produtos (nome, tipo, valor, quantidade) VALUES
 ("Ajazz AK680", "Keyboard", 179.99, 80),
 ("Razer Viper Mini", "Mouse", 299.99, 50),
 ("XFX RX 6650 XT", "Video Card", 1799.99, 30);
